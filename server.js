@@ -1,0 +1,117 @@
+var express = require('express');
+var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io').listen(server);
+
+//Definimos rutas para adjuntar librerias css y js.
+app.use('/css',express.static(__dirname + '/css'));
+//La carpeta js contiene el archivo logica.js. En ppio este archivo contiene:
+//iniciarJugador(jugador, equipo, rol) devuelve un arreglo con [TK, X, Y]. En caso de fallo el arreglo contiene [null,null,null].
+app.use('/js',express.static(__dirname + '/js'));
+app.use('/assets',express.static(__dirname + '/assets'));
+
+//index.html contiene el ambiente del juego y un formulario para iniciar sesion en el mismo.
+app.get('/',function(req,res){
+    res.sendFile(__dirname+'/index.html');
+});
+
+//Definimos un id para cada jugador. Se incrementa en 1 cuando un nuevo jugador se conecta.
+server.lastPlayderID = 0;
+
+//Configuramos el servidor para que escuche peticiones en el puerto 8081
+server.listen(process.env.PORT || 80,function(){
+    console.log('Listening on '+server.address().port);
+});
+
+io.on('connection',function(socket){
+
+    socket.on('newplayer',function(datos_jugador){
+		//Creamos un nuevo jugador.
+        //var jugador=iniciarJugador(datos_jugador.usuario, datos_jugador.equipo, datos_jugador.rol);
+		
+		socket.player = {
+            id: server.lastPlayderID++,
+            x: randomInt(100,400),
+            y: randomInt(100,400),
+			rol:datos_jugador.rol,
+			equipo:datos_jugador.equipo,
+			usuario:datos_jugador.usuario
+        };
+		console.log(datos_jugador.rol);
+		//Notificamos la existencia de un nuevo jugador a todos los miembros.
+        socket.emit('allplayers',getAllPlayers());
+        socket.broadcast.emit('newplayer',socket.player);
+		
+        socket.on('click',function(data){
+            console.log('click to '+data.x+', '+data.y);
+            socket.player.x = data.x;
+            socket.player.y = data.y;
+            io.emit('move',socket.player);
+        });
+		
+		//Movemos un jugador 
+		socket.on('mover', function(direccion){
+			switch(direccion.id){
+				
+				case 3 : //Mos movemos hacia la derecha. Sumamos en x.
+						 socket.player.x += 50;
+						 break;
+				case 7 : //Mos movemos hacia la izquierda. Restamos en x.
+						 socket.player.x -= 50;
+						 break;
+				case 1 : //Subimos, sumamos en y.
+						 socket.player.y += 50;
+						 break;
+				case 5 : //Bajamos, restamos en y.
+						 socket.player.y -= 50;
+						 break;
+				case 2 : //Movimiento diagonal. Noreste.
+						 socket.player.x += 50;
+						 socket.player.y += 50;
+						 break;
+				case 4 : //Sureste.
+					     socket.player.x -= 50;
+						 socket.player.y += 50;
+						 break;
+				case 6 : //Suroeste.
+						 socket.player.x -= 50;
+						 socket.player.y -= 50;
+						 break;
+				case 0 : //Noroeste.
+				         socket.player.x += 50;
+						 socket.player.y -= 50;
+						 break;
+				case 9 : 
+						 console.log('Atacar');
+						 
+			}
+						
+			//Enviamos la nueva posicion del jugador al cliente.
+			io.emit('mov', socket.player);
+			
+		});
+	
+        socket.on('disconnect',function(){
+            io.emit('remove',socket.player.id);
+        });
+    });
+
+    socket.on('test',function(){
+        console.log('test received');
+    });
+});
+
+function getAllPlayers(){
+    var players = [];
+	//io.sockets.connected contiene un arreglo interno con todos los sockets conectados al servidor.
+    Object.keys(io.sockets.connected).forEach(function(socketID){
+        var player = io.sockets.connected[socketID].player;
+        if(player) players.push(player);
+    });
+    return players;
+}
+
+//Crea un numero random para establecer la posicion inicial de un jugador.
+function randomInt (low, high) {
+    return Math.floor(Math.random() * (high - low) + low);
+}

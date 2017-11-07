@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="js/phaser.min.js"></script>
+    <title>Juego Multiplayer Online</title>
+</head>
+<body>
+    
+	
+<table>
+<form method="post">
+
+<tr><td><input id=1 type="text" name="usuario" value="" placeholder="Nombre de usuario" /></td></tr>
+<tr><td><select id=2>
+		<option selected value="0">Seleccione un Rol</option>
+		<option value="Curador">Curador</option>
+		<option value="Caballero">Caballero</option>
+		<option value="Luchador">Luchador</option>
+		<option value="Arquero">Arquero</option>
+		<option value="Mago">Mago</option>
+	<select></td>
+</tr>
+<tr><td><input id=3 type="text" name="equipo" value="" placeholder="Equipo"></td></tr>
+
+<tr><td><input type="button" name="ingresar" value="Ingresar" onclick="Client.askNewPlayer()" /></td></tr>
+
+</form>
+</table>
+	
+<div id='game'></div>
+	
+</body>
+<script src="js/game.js" type="text/javascript"></script>
+<script src="js/main.js" type="text/javascript"></script>
+<script src="js/client.js" type="text/javascript"></script>
+</html>

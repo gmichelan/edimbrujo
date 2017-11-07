@@ -1,0 +1,6 @@
+horseman-ne-bob1 = 0 0 72 72
+horseman-ne-bob2 = 73 0 72 72
+horseman-ne-bob3 = 146 0 72 72
+horseman-ne-bob4 = 219 0 72 72
+horseman-ne-bob5 = 292 0 72 72
+horseman-ne-bob6 = 365 0 72 72

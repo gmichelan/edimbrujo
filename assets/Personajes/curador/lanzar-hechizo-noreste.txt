@@ -1,0 +1,2 @@
+oracle-ne-magic1 = 0 0 72 72
+oracle-ne-magic2 = 73 0 72 72

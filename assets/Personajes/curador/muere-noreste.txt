@@ -1,0 +1,4 @@
+oracle-ne-die1 = 0 0 72 72
+oracle-ne-die2 = 73 0 72 72
+oracle-ne-die3 = 146 0 72 72
+oracle-ne-die4 = 219 0 72 72

@@ -1,0 +1,9 @@
+arquero-parado-1 = 0 0 53 91
+arquero-parado-2 = 54 0 53 91
+arquero-parado-3 = 108 0 53 91
+arquero-parado-4 = 162 0 53 91
+arquero-parado-5 = 216 0 53 91
+arquero-parado-6 = 270 0 53 91
+arquero-parado-7 = 324 0 53 91
+arquero-parado-8 = 378 0 53 91
+arquero-parado-9 = 432 0 53 91

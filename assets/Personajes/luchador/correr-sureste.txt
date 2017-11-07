@@ -1,0 +1,10 @@
+lord-se-run1 = 0 0 72 72
+lord-se-run2 = 73 0 72 72
+lord-se-run3 = 146 0 72 72
+lord-se-run4 = 219 0 72 72
+lord-se-run5 = 292 0 72 72
+lord-se-run6 = 365 0 72 72
+lord-se-run7 = 438 0 72 72
+lord-se-run8 = 511 0 72 72
+lord-se-run9 = 584 0 72 72
+lord-se-run91 = 657 0 72 72

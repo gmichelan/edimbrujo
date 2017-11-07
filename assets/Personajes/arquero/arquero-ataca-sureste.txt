@@ -1,0 +1,6 @@
+arquero atacando sureste1 = 0 0 92 116
+arquero atacando sureste2 = 93 0 92 116
+arquero atacando sureste3 = 186 0 92 116
+arquero atacando sureste4 = 279 0 92 116
+arquero atacando sureste5 = 372 0 92 116
+arquero atacando sureste6 = 465 0 92 116

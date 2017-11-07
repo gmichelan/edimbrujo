@@ -1,0 +1,8 @@
+lord-ne-hammer = 0 0 72 72
+lord-ne-hammer1 = 73 0 72 72
+lord-ne-hammer2 = 146 0 72 72
+lord-ne-hammer3 = 219 0 72 72
+lord-ne-hammer4 = 292 0 72 72
+lord-ne-hammer5 = 365 0 72 72
+lord-ne-hammer6 = 438 0 72 72
+lord-ne-hammer7 = 511 0 72 72

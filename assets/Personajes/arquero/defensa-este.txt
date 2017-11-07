@@ -1,0 +1,4 @@
+defensa1 = 0 0 59 98
+defensa2 = 60 0 59 98
+defensa3 = 120 0 59 98
+defensa4 = 180 0 59 98

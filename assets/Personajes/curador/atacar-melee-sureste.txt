@@ -1,0 +1,5 @@
+oracle-se-melee1 = 0 0 72 72
+oracle-se-melee2 = 73 0 72 72
+oracle-se-melee3 = 146 0 72 72
+oracle-se-melee4 = 219 0 72 72
+oracle-se-melee5 = 292 0 72 72

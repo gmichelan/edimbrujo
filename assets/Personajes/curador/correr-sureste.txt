@@ -1,0 +1,12 @@
+oracle-se-run1 = 0 0 72 72
+oracle-se-run2 = 73 0 72 72
+oracle-se-run3 = 146 0 72 72
+oracle-se-run4 = 219 0 72 72
+oracle-se-run5 = 292 0 72 72
+oracle-se-run6 = 365 0 72 72
+oracle-se-run7 = 438 0 72 72
+oracle-se-run8 = 511 0 72 72
+oracle-se-run9 = 584 0 72 72
+oracle-se-run91 = 657 0 72 72
+oracle-se-run92 = 730 0 72 72
+oracle-se-run93 = 803 0 72 72

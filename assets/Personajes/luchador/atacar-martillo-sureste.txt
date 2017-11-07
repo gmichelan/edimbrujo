@@ -1,0 +1,8 @@
+lord-se-hammer = 0 0 72 72
+lord-se-hammer1 = 73 0 72 72
+lord-se-hammer2 = 146 0 72 72
+lord-se-hammer3 = 219 0 72 72
+lord-se-hammer4 = 292 0 72 72
+lord-se-hammer5 = 365 0 72 72
+lord-se-hammer6 = 438 0 72 72
+lord-se-hammer7 = 511 0 72 72

@@ -1,0 +1,12 @@
+oracle-ne-run1 = 0 0 76 72
+oracle-ne-run2 = 77 0 76 72
+oracle-ne-run3 = 154 0 76 72
+oracle-ne-run4 = 231 0 76 72
+oracle-ne-run5 = 308 0 76 72
+oracle-ne-run6 = 385 0 76 72
+oracle-ne-run7 = 462 0 76 72
+oracle-ne-run8 = 539 0 76 72
+oracle-ne-run9 = 616 0 76 72
+oracle-ne-run91 = 693 0 76 72
+oracle-ne-run92 = 770 0 76 72
+oracle-ne-run93 = 847 0 76 72

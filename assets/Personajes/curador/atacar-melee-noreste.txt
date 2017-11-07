@@ -1,0 +1,6 @@
+oracle-ne-melee1 = 0 0 72 72
+oracle-ne-melee2 = 73 0 72 72
+oracle-ne-melee3 = 146 0 72 72
+oracle-ne-melee4 = 219 0 72 72
+oracle-ne-melee5 = 292 0 72 72
+oracle-ne-melee6 = 365 0 72 72

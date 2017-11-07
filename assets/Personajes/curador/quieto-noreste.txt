@@ -1,0 +1,6 @@
+oracle-ne-bob1 = 0 0 72 72
+oracle-ne-bob2 = 73 0 72 72
+oracle-ne-bob3 = 146 0 72 72
+oracle-ne-bob4 = 219 0 72 72
+oracle-ne-bob5 = 292 0 72 72
+oracle-ne-bob6 = 365 0 72 72

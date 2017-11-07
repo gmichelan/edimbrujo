@@ -1,0 +1,9 @@
+lord-se-axe1 = 0 0 72 72
+lord-se-axe2 = 73 0 72 72
+lord-se-axe3 = 146 0 72 72
+lord-se-axe4 = 219 0 72 72
+lord-se-axe5 = 292 0 72 72
+lord-se-axe6 = 365 0 72 72
+lord-se-axe7 = 438 0 72 72
+lord-se-axe8 = 511 0 72 72
+lord-se-axe9 = 584 0 72 72

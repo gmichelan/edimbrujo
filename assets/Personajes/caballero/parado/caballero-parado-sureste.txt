@@ -1,0 +1,6 @@
+horseman-se-bob1 = 0 0 72 72
+horseman-se-bob2 = 73 0 72 72
+horseman-se-bob3 = 146 0 72 72
+horseman-se-bob4 = 219 0 72 72
+horseman-se-bob5 = 292 0 72 72
+horseman-se-bob6 = 365 0 72 72

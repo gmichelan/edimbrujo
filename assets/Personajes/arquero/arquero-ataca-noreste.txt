@@ -1,0 +1,6 @@
+arquero ataca noreste1 = 0 0 60 115
+arquero ataca noreste2 = 61 0 60 115
+arquero ataca noreste3 = 122 0 60 115
+arquero ataca noreste4 = 183 0 60 115
+arquero ataca noreste5 = 244 0 60 115
+arquero ataca noreste6 = 305 0 60 115

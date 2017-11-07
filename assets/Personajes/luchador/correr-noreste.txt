@@ -1,0 +1,10 @@
+lord-ne-run1 = 0 0 72 72
+lord-ne-run2 = 73 0 72 72
+lord-ne-run3 = 146 0 72 72
+lord-ne-run4 = 219 0 72 72
+lord-ne-run5 = 292 0 72 72
+lord-ne-run6 = 365 0 72 72
+lord-ne-run7 = 438 0 72 72
+lord-ne-run8 = 511 0 72 72
+lord-ne-run9 = 584 0 72 72
+lord-ne-run91 = 657 0 72 72

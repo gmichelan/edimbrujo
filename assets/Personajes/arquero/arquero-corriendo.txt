@@ -1,0 +1,12 @@
+arquero corriendo1 = 0 0 64 87
+arquero corriendo2 = 65 0 64 87
+arquero corriendo3 = 130 0 64 87
+arquero corriendo4 = 195 0 64 87
+arquero corriendo5 = 260 0 64 87
+arquero corriendo6 = 325 0 64 87
+arquero corriendo7 = 390 0 64 87
+arquero corriendo8 = 455 0 64 87
+arquero corriendo9 = 520 0 64 87
+arquero corriendo91 = 585 0 64 87
+arquero corriendo92 = 650 0 64 87
+arquero corriendo93 = 715 0 64 87

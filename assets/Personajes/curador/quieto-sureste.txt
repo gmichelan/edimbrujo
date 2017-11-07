@@ -1,0 +1,6 @@
+oracle-se-bob1 = 0 0 72 72
+oracle-se-bob2 = 73 0 72 72
+oracle-se-bob3 = 146 0 72 72
+oracle-se-bob4 = 219 0 72 72
+oracle-se-bob5 = 292 0 72 72
+oracle-se-bob6 = 365 0 72 72

@@ -1,0 +1,6 @@
+lord-se-bob1 = 0 0 72 72
+lord-se-bob2 = 73 0 72 72
+lord-se-bob3 = 146 0 72 72
+lord-se-bob4 = 219 0 72 72
+lord-se-bob5 = 292 0 72 72
+lord-se-bob6 = 365 0 72 72
