@@ -2,6 +2,40 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
+var cte_pixel=53;
+//--------------------------------------------------------------
+var logica = require("./js/logica.js");
+app.get('/inicio',function(req,res){
+	var jug = req.param('Jugador');
+	var rol=req.param('Rol');
+	var eq = req.param('Equipo');
+    mensaje='Se crea el Jugador '+jug+
+    ' asociado al Rol '+ rol+
+    ' para el Equipo '+ eq+'.';
+	
+    console.log(mensaje);
+	var ar = logica.iniciarJugador(jug, eq, rol);
+	res.send(ar[0] + ' ' + ar[1] + ' ' + ar[2]);
+
+});
+
+app.post('/mover',function(req,res){
+	var tok = req.param('token');
+	var num = req.param('num');
+	msg = logica.mover(token, num);
+	res.send(msg);
+});
+
+app.post('/atacar',function(req,res){
+	if (seEncuentra(req.param('token')))
+	{
+    res.send('el jugador '+jugador(token)+' ataca!');}
+	else{
+		res.send('El token no existe perrito, deja de paquearte jodi2');
+	}
+});
+
+//--------------------------------------------------------------
 
 //Definimos rutas para adjuntar librerias css y js.
 app.use('/css',express.static(__dirname + '/css'));
@@ -19,7 +53,7 @@ app.get('/',function(req,res){
 server.lastPlayderID = 0;
 
 //Configuramos el servidor para que escuche peticiones en el puerto 8081
-server.listen(process.env.PORT || 80,function(){
+server.listen(process.env.PORT || 65000,function(){
     console.log('Listening on '+server.address().port);
 });
 
@@ -27,12 +61,13 @@ io.on('connection',function(socket){
 
     socket.on('newplayer',function(datos_jugador){
 		//Creamos un nuevo jugador.
-        //var jugador=iniciarJugador(datos_jugador.usuario, datos_jugador.equipo, datos_jugador.rol);
+        var jugador=logica.iniciarJugador(datos_jugador.usuario, datos_jugador.equipo, datos_jugador.rol);
 		
 		socket.player = {
             id: server.lastPlayderID++,
-            x: randomInt(100,400),
-            y: randomInt(100,400),
+			token: jugador[0],
+            x: jugador[1],
+            y: jugador[2],
 			rol:datos_jugador.rol,
 			equipo:datos_jugador.equipo,
 			usuario:datos_jugador.usuario
@@ -42,51 +77,54 @@ io.on('connection',function(socket){
         socket.emit('allplayers',getAllPlayers());
         socket.broadcast.emit('newplayer',socket.player);
 		
-        socket.on('click',function(data){
-            console.log('click to '+data.x+', '+data.y);
-            socket.player.x = data.x;
-            socket.player.y = data.y;
-            io.emit('move',socket.player);
-        });
+        // socket.on('click',function(data){
+            // console.log('click to '+data.x+', '+data.y);
+            // socket.player.x = data.x;
+            // socket.player.y = data.y;
+            // io.emit('move',socket.player);
+        // });
 		
 		//Movemos un jugador 
 		socket.on('mover', function(direccion){
-			switch(direccion.id){
-				
-				case 3 : //Mos movemos hacia la derecha. Sumamos en x.
-						 socket.player.x += 50;
-						 break;
-				case 7 : //Mos movemos hacia la izquierda. Restamos en x.
-						 socket.player.x -= 50;
-						 break;
-				case 1 : //Subimos, sumamos en y.
-						 socket.player.y += 50;
-						 break;
-				case 5 : //Bajamos, restamos en y.
-						 socket.player.y -= 50;
-						 break;
-				case 2 : //Movimiento diagonal. Noreste.
-						 socket.player.x += 50;
-						 socket.player.y += 50;
-						 break;
-				case 4 : //Sureste.
-					     socket.player.x -= 50;
-						 socket.player.y += 50;
-						 break;
-				case 6 : //Suroeste.
-						 socket.player.x -= 50;
-						 socket.player.y -= 50;
-						 break;
-				case 0 : //Noroeste.
-				         socket.player.x += 50;
-						 socket.player.y -= 50;
-						 break;
-				case 9 : 
-						 console.log('Atacar');
+			//switch(direccion.id){
+				var posicion=logica.mover(socket.player.token,direccion.id);
+				console.log('Ejecutamos mover del token'+socket.player.token);
+				// case 3 : //Mos movemos hacia la derecha. Sumamos en x.
+						 // socket.player.x += 50;
+						 // break;
+				// case 7 : //Mos movemos hacia la izquierda. Restamos en x.
+						 // socket.player.x -= 50;
+						 // break;
+				// case 1 : //Subimos, sumamos en y.
+						 // socket.player.y += 50;
+						 // break;
+				// case 5 : //Bajamos, restamos en y.
+						 // socket.player.y -= 50;
+						 // break;
+				// case 2 : //Movimiento diagonal. Noreste.
+						 // socket.player.x += 50;
+						 // socket.player.y += 50;
+						 // break;
+				// case 4 : //Sureste.
+					     // socket.player.x -= 50;
+						 // socket.player.y += 50;
+						 // break;
+				// case 6 : //Suroeste.
+						 // socket.player.x -= 50;
+						 // socket.player.y -= 50;
+						 // break;
+				// case 0 : //Noroeste.
+				         // socket.player.x += 50;
+						 // socket.player.y -= 50;
+						 // break;
+				// case 9 : 
+						 // console.log('Atacar');
 						 
-			}
+			//}
 						
 			//Enviamos la nueva posicion del jugador al cliente.
+			socket.player.x = posicion[0]*cte_pixel;
+			socket.player.y = posicion[1]*cte_pixel;
 			io.emit('mov', socket.player);
 			
 		});
@@ -104,11 +142,11 @@ io.on('connection',function(socket){
 function getAllPlayers(){
     var players = [];
 	//io.sockets.connected contiene un arreglo interno con todos los sockets conectados al servidor.
-    Object.keys(io.sockets.connected).forEach(function(socketID){
-        var player = io.sockets.connected[socketID].player;
-        if(player) players.push(player);
-    });
-    return players;
+    //Object.keys(io.sockets.connected).forEach(function(socketID){
+      //  var player = io.sockets.connected[socketID].player;
+        //if(player) players.push(player);
+    //});
+    return logica.getJugadores();
 }
 
 //Crea un numero random para establecer la posicion inicial de un jugador.

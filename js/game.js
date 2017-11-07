@@ -11,7 +11,7 @@ Game.init = function(){
 
 //Cargamos los recursos del juego.
 Game.preload = function() {
-    game.load.tilemap('map', 'assets/map/map.csv', null, Phaser.Tilemap.TILED_CSV);	
+    game.load.tilemap('map', 'assets/map/mapa.csv', null, Phaser.Tilemap.TILED_CSV);	
 	game.load.image('tile', 'assets/map/tiles.png');
     game.load.image('sprite','assets/sprites/sprite.png');
 	
@@ -108,11 +108,6 @@ Game.addNewPlayer = function(id,x,y,rol){
 			      game.physics.arcade.enable(Game.playerMap[id]);
 	}
 	
-	//Game.playerMap[id] = game.add.sprite(x,y,'sprite');
-	
-	//Activamos la fisica del jugador.
-	
-	//game.camera.follow(Game.playerMap[Client.id], Phaser.Camera.FOLLOW_LOCKON);
 };
 
 //Movemos un jugador en el ambiente del juego.
