@@ -11,6 +11,7 @@ var jeje = require("./bd.js");
 function iniciarJugador(jug, eq, rol){
 	token = jug+''+eq;
 	if(!seEncuentra(token)){
+	//Definimos la posicion del sprite.
 	var x = Math.floor(Math.random()* 40);
 	var y = Math.floor(Math.random()* 40);
 	while(arreglo[x][y]!=28){
@@ -38,7 +39,7 @@ function iniciarJugador(jug, eq, rol){
 		j++;
 	}
 	if(j==atributos.length){
-	res.send("Rol inexistente");
+	res.send("Rol inexistente "+rol);
 	}else{
 	jugador[cantidadJugadores] = [token, jug, rol,eq, x, y,equipo,atributos[j][1],atributos[j][2],atributos[j][3],atributos[j][4]];
 	arreglo[x][y] = equipo;

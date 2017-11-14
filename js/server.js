@@ -22,6 +22,7 @@ app.post('/mover',function(req,res){
 	var num = req.param('num');
 	msg = logica.mover(token, num);
 	res.send(msg);
+	
 });
 
 

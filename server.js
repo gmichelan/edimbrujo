@@ -3,6 +3,7 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
 var cte_pixel=53;
+var super_socket;
 //--------------------------------------------------------------
 var logica = require("./js/logica.js");
 app.get('/inicio',function(req,res){
@@ -14,19 +15,42 @@ app.get('/inicio',function(req,res){
     ' para el Equipo '+ eq+'.';
 	
     console.log(mensaje);
-	var ar = logica.iniciarJugador(jug, eq, rol);
-	res.send(ar[0] + ' ' + ar[1] + ' ' + ar[2]);
+	var jugador = logica.iniciarJugador(jug, eq, rol);
+	res.send(jugador[0] + ' ' + jugador[1] + ' ' + jugador[2]);
+	
+	player={
+		id: server.lastPlayderID++,
+			token: jugador[0],
+            x: jugador[1]*cte_pixel,
+            y: jugador[2]*cte_pixel,
+			rol:rol,
+			equipo:eq,
+			usuario:jug
+	}
+	
+	io.emit('newplayer',player);
 
 });
 
-app.post('/mover',function(req,res){
+app.get('/mover',function(req,res){
 	var tok = req.param('token');
 	var num = req.param('num');
-	msg = logica.mover(token, num);
-	res.send(msg);
+	jugador = logica.mover(token, num);
+	res.send(jugador);
+	
+	player={
+		id: 0,
+			token: tok,
+            x: jugador[0]*cte_pixel,
+            y: jugador[1]*cte_pixel,
+			rol:'xx',
+			equipo:'xx',
+			usuario:'jj'
+	}	
+	io.emit('mov_rest', player);
 });
 
-app.post('/atacar',function(req,res){
+app.get('/atacar',function(req,res){
 	if (seEncuentra(req.param('token')))
 	{
     res.send('el jugador '+jugador(token)+' ataca!');}

@@ -73,8 +73,13 @@ Client.sendClick = function(x,y){
 
 //data es el objeto socket.player que envia el servidor.
 Client.socket.on('newplayer',function(data){
-    Game.addNewPlayer(data.id,data.x,data.y,data.rol);
+    Game.addNewPlayer(data.token,data.x,data.y,data.rol);
 	console.log(Client.rol);
+});
+
+Client.socket.on('mov_rest',function(posicion){
+    console.log('mov '+posicion.token);
+	Game.movePlayer(posicion.token, posicion.x, posicion.y);
 });
 
 Client.socket.on('allplayers',function(data){
@@ -96,6 +101,7 @@ Client.socket.on('allplayers',function(data){
     });
 	
 	Client.socket.on('mov', function(posicion){
+		console.log('mov '+posicion.token);
 		Game.movePlayer(posicion.token, posicion.x, posicion.y);
 	});
 });
