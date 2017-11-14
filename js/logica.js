@@ -14,15 +14,17 @@ function iniciarJugador(jug, eq, rol){
 	//Definimos la posicion del sprite.
 	var x = Math.floor(Math.random()* 40);
 	var y = Math.floor(Math.random()* 40);
-	while(arreglo[x][y]!=28){
+	//28:pasto.
+	while(arreglo[x][y]!=28 && arreglo[x][y]!=3 && arreglo[x][y]!=4 && arreglo[x][y]!=5 && arreglo[x][y]!=6){
 	x = Math.floor(Math.random()* 40);
-	y = Math.floor(Math.random()* 40);	
+	y = Math.floor(Math.random()* 40);
 	}
 	
 	var limite = jugador.length;
 	var i=0;
 	var bandera=true;
 	var equipo;
+	//Para tener id de equipo.
 	while(bandera && i<limite){
 		if(jugador[i][3] == eq){
 		equipo=jugador[i][6];
@@ -35,24 +37,30 @@ function iniciarJugador(jug, eq, rol){
 			equipo=cantEquipo;
 		}
 		var j=0;
+	//Buscamos el j del rol.
 	while(j<atributos.length  && rol != atributos[j][0]){
 		j++;
 	}
 	if(j==atributos.length){
-	res.send("Rol inexistente "+rol);
+	//res.send("Rol inexistente "+rol);
+	return ["error","Rol inexistente "];
 	}else{
 	jugador[cantidadJugadores] = [token, jug, rol,eq, x, y,equipo,atributos[j][1],atributos[j][2],atributos[j][3],atributos[j][4]];
-	arreglo[x][y] = equipo;
+	arreglo[x][y] = equipo+100;
 	cantidadJugadores++;
 	return[token, x, y];
 	}
 	}	else {
-		return [null,null,null];
+		return ["error","ya existe el jugador "+jug+" en el equipo "+eq];
 	}
 }
 
 function getJugadores(){
 	return jugador;
+}
+
+function getMundo(){
+	return arreglo;
 }
 
 function mover(tok,pos){
@@ -98,14 +106,18 @@ function mover(tok,pos){
         if (px-1 >= 0){
 					px = px-1;}
 	}
-		if (arreglo[px][py] == 28){
+		if (arreglo[px][py] == 28 || arreglo[px][py]==3 || arreglo[px][py]==4 || arreglo[px][py]==5 || arreglo[px][py]==6){
 			arreglo[jugador[indiceActual][4]][jugador[indiceActual][5]] = 28;
 			jugador[indiceActual][4] = px;
 			jugador[indiceActual][5] = py;
-			arreglo[px][py] = jugador[indiceActual][6];}
-	}
-	//return [arreglo, jugador];
-	return [px, py];
+			arreglo[px][py] = jugador[indiceActual][6]+100;
+			return [px, py];
+		}else
+			return ["error", "posicion ocupada"];
+			
+	}else
+		return ["error", "no se encuentra token"];
+	
 		
 }
 
@@ -124,3 +136,4 @@ function seEncuentra(token) {
 module.exports.iniciarJugador = iniciarJugador;
 module.exports.mover = mover;
 module.exports.getJugadores = getJugadores;
+module.exports.getMundo = getMundo;

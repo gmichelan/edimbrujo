@@ -16,8 +16,9 @@ app.get('/inicio',function(req,res){
 	
     console.log(mensaje);
 	var jugador = logica.iniciarJugador(jug, eq, rol);
-	res.send(jugador[0] + ' ' + jugador[1] + ' ' + jugador[2]);
+	res.send(jugador);
 	
+	if(jugador[0] != "error"){
 	player={
 		id: server.lastPlayderID++,
 			token: jugador[0],
@@ -29,6 +30,7 @@ app.get('/inicio',function(req,res){
 	}
 	
 	io.emit('newplayer',player);
+	}
 
 });
 
@@ -36,8 +38,9 @@ app.get('/mover',function(req,res){
 	var tok = req.param('token');
 	var num = req.param('num');
 	jugador = logica.mover(token, num);
-	res.send(jugador);
+	res.send([logica.getJugadores(), logica.getMundo()]);
 	
+	if(jugador[0] != "error"){
 	player={
 		id: 0,
 			token: tok,
@@ -48,6 +51,7 @@ app.get('/mover',function(req,res){
 			usuario:'jj'
 	}	
 	io.emit('mov_rest', player);
+	}
 });
 
 app.get('/atacar',function(req,res){
