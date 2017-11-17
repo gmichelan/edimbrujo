@@ -132,6 +132,31 @@ function seEncuentra(token) {
 				}
 		return esta;
 }
+function atacar(token){
+	if (seEncuentra(tok)){
+		var px = jugador[indiceActual][4];//posición en x del token 
+		var py = jugador[indiceActual][5];//posición en y del token
+		var limx = arreglo.length;//limite del mundo en x 
+		var limy = arreglo[0].length;//limite del mundo en y
+		//m einteresa del 6:equipo, 7:vida, 8:fuerza, 9:velocidad, 10:rango
+		//si el jugador tiene en 10 algun otro agente que no es del equipo lo ataca y le resta
+		//arreglo esta el mapa
+
+        for(var i=0; i<jugador.length; i++){
+			if(i!=indiceActual && jugador[i][6] != jugador[indiceActual][6] && Math.sqrt(Math.pow(jugador[i][4]-px)+Math.pow(jugador[i][5]-py)<jugador[indiceActual][10])){
+				if(jugador[i][7]-jugador[indiceActual][8]<0)
+				{
+					jugador.pop(i);//murio el jugador 1
+				}
+				else{
+					jugador[i][7]-=jugador[indiceActual][8];
+				}
+			}
+		}
+
+	}
+
+}
 
 module.exports.iniciarJugador = iniciarJugador;
 module.exports.mover = mover;
