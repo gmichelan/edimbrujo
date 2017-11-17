@@ -22,8 +22,8 @@ app.get('/inicio',function(req,res){
 	player={
 		id: server.lastPlayderID++,
 			token: jugador[0],
-            x: jugador[1]*cte_pixel,
-            y: jugador[2]*cte_pixel,
+            x: jugador[2]*cte_pixel,
+            y: jugador[1]*cte_pixel,
 			rol:rol,
 			equipo:eq,
 			usuario:jug
@@ -37,15 +37,15 @@ app.get('/inicio',function(req,res){
 app.get('/mover',function(req,res){
 	var tok = req.param('token');
 	var num = req.param('num');
-	jugador = logica.mover(token, num);
+	jugador = logica.mover(tok, num);
 	res.send([logica.getJugadores(), logica.getMundo()]);
 	
 	if(jugador[0] != "error"){
 	player={
 		id: 0,
 			token: tok,
-            x: jugador[0]*cte_pixel,
-            y: jugador[1]*cte_pixel,
+            x: jugador[1]*cte_pixel,
+            y: jugador[0]*cte_pixel,
 			rol:'xx',
 			equipo:'xx',
 			usuario:'jj'
@@ -55,12 +55,9 @@ app.get('/mover',function(req,res){
 });
 
 app.get('/atacar',function(req,res){
-	if (seEncuentra(req.param('token')))
-	{
-    res.send('el jugador '+jugador(token)+' ataca!');}
-	else{
-		res.send('El token no existe perrito, deja de paquearte jodi2');
-	}
+    var tok = req.param('token');
+    jugador = logica.atacar(tok);
+	
 });
 
 //--------------------------------------------------------------

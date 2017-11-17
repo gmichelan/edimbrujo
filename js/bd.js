@@ -39,6 +39,18 @@ lineReader.on('close', ()=>{
 	//console.log(arreglo[0][i]);
  // }
 	return arreglo;
+    /*    
+        var salida= new Array();
+        for (var j = 0; j < arreglo.length; j++) {
+                salida[j]=new Array();
+            }
+        for (var i = 0; i < arreglo.length; i++) {
+            for (var j = 0; j < arreglo[i].length; j++) {
+                salida[j][i]=arreglo[i][j];
+            }
+        }
+        return salida;
+	    */
     }	
 
 	

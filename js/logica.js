@@ -106,7 +106,7 @@ function mover(tok,pos){
         if (px-1 >= 0){
 					px = px-1;}
 	}
-		if (arreglo[px][py] == 28 || arreglo[px][py]==3 || arreglo[px][py]==4 || arreglo[px][py]==5 || arreglo[px][py]==6){
+  if (arreglo[px][py] == 28 || arreglo[px][py]==3 || arreglo[px][py]==4 || arreglo[px][py]==5 || arreglo[px][py]==6){
 			arreglo[jugador[indiceActual][4]][jugador[indiceActual][5]] = 28;
 			jugador[indiceActual][4] = px;
 			jugador[indiceActual][5] = py;
