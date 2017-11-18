@@ -7,12 +7,17 @@ var Client = {};
 Client.socket = io.connect();
 Client.id;
 Client.rol;
+Client.token;
 
 Client.sendTest = function(){
     console.log("test sent");
     Client.socket.emit('test');
 };
 
+Client.getAllPlayers= function(){
+    console.log("get All Players");
+    Client.socket.emit('getallplayers');
+};
 Client.mover = function(direccion){
 	console.log(direccion.event.key);
 	var id=0;
@@ -67,14 +72,19 @@ Client.askNewPlayer = function(){
     Client.socket.emit('newplayer', { usuario : document.getElementById(1).value, rol : document.getElementById(2).value, equipo : document.getElementById(3).value });
 };
 
-Client.sendClick = function(x,y){
+/*Client.sendClick = function(x,y){
   Client.socket.emit('click',{x:x,y:y});
-};
+};*/
 
 //data es el objeto socket.player que envia el servidor.
 Client.socket.on('newplayer',function(data){
     Game.addNewPlayer(data.token,data.x,data.y,data.rol);
 	console.log(Client.rol);
+});
+
+Client.socket.on('tabla',function(data){
+        Game.updateTabla(data);
+	console.log(data);
 });
 
 Client.socket.on('mov_rest',function(posicion){
@@ -83,9 +93,11 @@ Client.socket.on('mov_rest',function(posicion){
 });
 
 Client.socket.on('allplayers',function(data){
+    console.log(data);
     for(var i = 0; i < data.length; i++){
+       
 		//id, x, y, rol
-        Game.addNewPlayer(data[i][0],data[i][4],data[i][5],data[i][2]);
+        Game.addNewPlayer(data[i].token,data[i].x,data[i].y,data[i].rol);
     }
 
 	//ID del ultimo jugador.
@@ -102,6 +114,7 @@ Client.socket.on('allplayers',function(data){
 	
 	Client.socket.on('mov', function(posicion){
 		console.log('mov '+posicion.token);
+                console.log(posicion);
 		Game.movePlayer(posicion.token, posicion.x, posicion.y);
 	});
 });

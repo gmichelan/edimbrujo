@@ -12,7 +12,12 @@ lineReader.on('line', function (line) {
 	arreglo[i] = new Array();
     arreglo[i]= line.split(',');
 	for(var j =0; j < arreglo[i].length ; j++){
-	arreglo[i][j] = parseInt(arreglo[i][j], 10); 
+	arreglo[i][j] =parseInt(arreglo[i][j], 10);
+        if(arreglo[i][j]!=28 && arreglo[i][j]!=3 && arreglo[i][j]!=4 && arreglo[i][j]!=5 && arreglo[i][j]!=6){
+            arreglo[i][j]=1;
+        }else{
+            arreglo[i][j]=0;
+        }
 	}
 	i++;
 });
@@ -38,19 +43,17 @@ lineReader.on('close', ()=>{
 //  for (var i = 0; i < limite; i++) {
 	//console.log(arreglo[0][i]);
  // }
-	return arreglo;
-    /*    
-        var salida= new Array();
-        for (var j = 0; j < arreglo.length; j++) {
-                salida[j]=new Array();
+	//return arreglo;
+        //transponer matriz a array de filas como se representa en phaser
+    /*for (var i = 0; i < arreglo.lenth; i++) {
+            for (var j = 0; j <i; j++) {
+      //swap element[i,j] and element[j,i]
+            var temp = arreglo[i][j];
+            arreglo[i][j] = arreglo[j][i];
+            arreglo[j][i] = temp;
             }
-        for (var i = 0; i < arreglo.length; i++) {
-            for (var j = 0; j < arreglo[i].length; j++) {
-                salida[j][i]=arreglo[i][j];
-            }
-        }
-        return salida;
-	    */
+        }*/
+        return arreglo;
     }	
 
 	

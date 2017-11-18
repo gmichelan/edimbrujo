@@ -4,7 +4,7 @@
  */
 
 var Game = {};
-
+var textoTabla=null;
 Game.init = function(){
     game.stage.disableVisibilityChange = true;
 };
@@ -17,11 +17,11 @@ Game.preload = function() {
 	
 	game.load.spritesheet('caballero','assets/Personajes/caballero/parado/caballero-parado-sureste.png',72,72);
 	game.load.spritesheet('arquero','assets/Personajes/arquero/arquero-parado.png',53,91);
-	game.load.spritesheet('curador','assets/Personajes/curador/quieto-sureste.png',72,72);
+	game.load.spritesheet('curador','assets/Personajes/curador/quieto-sureste.png',53,53);
 	game.load.spritesheet('luchador','assets/Personajes/luchador/quieto-hacha-sureste.png',72,72);
 	
 	//IMG para los disparos.
-	game.load.image('esfera','assets/sprites/esfera.png');
+	game.load.image('bono','assets/sprites/esfera.png');
 };
 
 Game.create = function(){
@@ -62,7 +62,7 @@ Game.create = function(){
 	esferas=game.add.group();
 	esferas.enableBody=true;
 	esferas.physicsBodyType=Phaser.Physics.ARCADE;
-	esferas.createMultiple(20, 'esfera');
+	esferas.createMultiple(20, 'bono');
 	
 	//Si presionamos la tecla S, obtenemos un disparo y lo enviamos al servidor.
 	var s=game.input.keyboard.addKey(Phaser.Keyboard.S);
@@ -77,8 +77,13 @@ Game.create = function(){
     }
     layer.inputEnabled = true; // Allows clicking on the map ; it's enough to do it on the last layer
     layer.events.onInputUp.add(Game.getCoordinates, this);
-	
+    var style = { font: "16px Courier", fill: "#fff", tabs: [ 164, 120 ] };
+    var headings = [ 'Equipo', 'Puntos' ];
+    var text = Game.add.text(32, 32, '', style);
+    textoTabla = Game.add.text(32, 55, '',style );
+    text.parseList(headings);
     //Client.askNewPlayer();
+    Client.getAllPlayers();
 	
 };
 
@@ -104,9 +109,15 @@ Game.addNewPlayer = function(id,x,y,rol){
 		case "Curador"   : Game.playerMap[id] = game.add.sprite(x,y,'curador');
 						   game.physics.arcade.enable(Game.playerMap[id]);
 						   break;
+                case "Bono"   : Game.playerMap[id] = game.add.sprite(x,y,'bono');
+						   //game.physics.arcade.enable(Game.playerMap[id]);
+						   break;
 		default : Game.playerMap[id] = game.add.sprite(x,y,'sprite');
 			      game.physics.arcade.enable(Game.playerMap[id]);
+         
 	}
+        var t = Game.add.text(0,0,id);
+        Game.playerMap[id].addChild(t);
 	
 };
 
@@ -128,4 +139,8 @@ Game.movePlayer = function(id,x,y){
 Game.removePlayer = function(id){
     Game.playerMap[id].destroy();
     delete Game.playerMap[id];
+};
+Game.updateTabla = function(data){
+    data.sort(function(a,b){ return (a[1] < b[1] ? 1 : (a[1] > b[1] ? -1 : 0)); });
+    textoTabla.parseList(data);
 };
