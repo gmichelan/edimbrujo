@@ -54,15 +54,10 @@ Client.mover = function(direccion){
 	Client.socket.emit('mover', { id : id });
 };
 
-Client.disparar = function(){
-	var disparo=esferas.getFirstExists(false);
+Client.atacar = function(){
+	//var disparo=esferas.getFirstExists(false);
 	console.log('Ejecutamos la funcion disparar');
-	console.log(disparo);
-	if(disparo){
-		disparo.reset(100,200);
-		disparo.body.velocity.y += 100;
-	}
-	//Client.socket.emit('disparar');
+	Client.socket.emit('atacar');
 };
 
 //Enviamos un mensje al servidor cuando un  nuevo jugador se conecta al mismo.
@@ -91,6 +86,16 @@ Client.socket.on('mov_rest',function(posicion){
     console.log('mov '+posicion.token);
 	Game.movePlayer(posicion.token, posicion.x, posicion.y);
 });
+
+Client.socket.on('addbonos',function(data){
+    console.log(data);
+    for(var i = 0; i < data.length; i++){
+       
+		//id, x, y, rol
+        Game.addNewPlayer(data[i].token,data[i].x,data[i].y,data[i].rol);
+    }
+});
+
 
 Client.socket.on('allplayers',function(data){
     console.log(data);
