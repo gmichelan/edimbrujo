@@ -218,41 +218,41 @@ io.on('connection', function (socket) {
         socket.emit('allplayers', getAllPlayers());
         console.log(players);
         socket.emit('tabla', logica.getTabla());
-    });
-
-    socket.on('newplayer', function (datos_jugador) {
-        //Creamos un nuevo jugador.
-        mensaje = 'Se crea desde Web el Jugador ' + datos_jugador.usuario +
-                ' asociado al Rol ' + datos_jugador.rol +
-                ' para el Equipo ' + datos_jugador.equipo + '.';
-
-        console.log(mensaje);
-        var jugador = logica.iniciarJugador(datos_jugador.usuario, datos_jugador.equipo, datos_jugador.rol);
-        if (jugador[0] != "ERROR") {
-            socket.player = {
-                id: server.lastPlayderID++,
-                token: jugador[0],
-                x: jugador[2] * cte_pixel,
-                y: jugador[1] * cte_pixel,
-                rol: datos_jugador.rol,
-                equipo: datos_jugador.equipo,
-                usuario: datos_jugador.usuario
-            };
-            console.log(datos_jugador.rol);
-            //Notificamos la existencia de un nuevo jugador a todos los miembros.
-            //socket.emit('allplayers', getAllPlayers());
-            io.emit('addbonos', ultimosBonos());
-            io.emit('newplayer', socket.player);
-            io.emit('tabla', logica.getTabla());
-            console.log('OK');
-        } else
-            console.log(jugador);
-        // socket.on('click',function(data){
-        // console.log('click to '+data.x+', '+data.y);
-        // socket.player.x = data.x;
-        // socket.player.y = data.y;
-        // io.emit('move',socket.player);
         //});
+
+        socket.on('newplayer', function (datos_jugador) {
+            //Creamos un nuevo jugador.
+            mensaje = 'Se crea desde Web el Jugador ' + datos_jugador.usuario +
+                    ' asociado al Rol ' + datos_jugador.rol +
+                    ' para el Equipo ' + datos_jugador.equipo + '.';
+
+            console.log(mensaje);
+            var jugador = logica.iniciarJugador(datos_jugador.usuario, datos_jugador.equipo, datos_jugador.rol);
+            if (jugador[0] != "ERROR") {
+                socket.player = {
+                    id: server.lastPlayderID++,
+                    token: jugador[0],
+                    x: jugador[2] * cte_pixel,
+                    y: jugador[1] * cte_pixel,
+                    rol: datos_jugador.rol,
+                    equipo: datos_jugador.equipo,
+                    usuario: datos_jugador.usuario
+                };
+                console.log(datos_jugador.rol);
+                //Notificamos la existencia de un nuevo jugador a todos los miembros.
+                //socket.emit('allplayers', getAllPlayers());
+                io.emit('addbonos', ultimosBonos());
+                io.emit('newplayer', socket.player);
+                io.emit('tabla', logica.getTabla());
+                console.log('OK');
+            } else
+                console.log(jugador);
+            // socket.on('click',function(data){
+            // console.log('click to '+data.x+', '+data.y);
+            // socket.player.x = data.x;
+            // socket.player.y = data.y;
+            // io.emit('move',socket.player);
+        });
 
         //Movemos un jugador 
         socket.on('mover', function (direccion) {
@@ -306,6 +306,7 @@ io.on('connection', function (socket) {
         });
     });
 });
+
 
 
 function getAllPlayers() {

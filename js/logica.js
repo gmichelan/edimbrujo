@@ -10,7 +10,7 @@ jeje.csvtoarray();
 arreglo = jeje.mapa();
 
 
-var atributos = [["Mago", 1300, 100, 10, 5], ["Arquero", 1000, 50, 20, 10], ["Caballero", 2000, 200, 500, 1], ["Curador", 1500, 200, 30, 2]];
+var atributos = [["Mago", 1300, 100, 10, 5], ["Arquero", 1000, 50, 20, 10], ["Caballero", 2000, 500, 50, 1], ["Curador", 1500, 200, 30, 2]];
 
 
 
@@ -47,8 +47,12 @@ function iniciarBonos() {
 
 
 function iniciarJugador(jug, eq, rol) {
+    if(jug.length>5) jug=jug.substring(0,5);
+    if(eq.length>5) eq=eq.substring(0,5);
+    
     token = jug + '' + eq;
-    if (!seEncuentra(token)) {
+    indiceActual = seEncuentra(token);
+    if (indiceActual === null) {
         //Definimos la posicion del sprite.
         var pos = buscoXY();
         var x = pos[0];
