@@ -14,12 +14,12 @@
 //$token='f053daab9855fe42942624aef382729d';
 //$problema=1;
         
-        if (isset($_POST['num'])){
-            $edimbrujo = new Edimbrujo($_POST['num'], "Arquero", "php");
-            $todo = $edimbrujo->iniciar();
+        
+            $edimbrujo = new Edimbrujo('random', "Arquero", "php");
+        
         //else {
-        for ($index2 = 0; $index2 < 500 ; $index2++) {
-            
+        //for ($index2 = 0; $index2 < 500 ; $index2++) {
+        while(true){
         
                 $acc=rand(0, 8);
                 if($acc==8){
@@ -40,7 +40,7 @@
                     echo '<br>';
                 }
             }
-        }
+        
         //print_r($todo);
 //$i=1;
 //while($i<=5){

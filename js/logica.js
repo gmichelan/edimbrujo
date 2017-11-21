@@ -32,7 +32,7 @@ function buscoXY() {
 
 function iniciarBonos() {
     //console.log(arreglo);
-    for (var j = 0; j < 10; j++) {
+    for (var j = 0; j < 3; j++) {
         var pos = buscoXY();
         var x = pos[0];
         var y = pos[1];

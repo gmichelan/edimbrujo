@@ -2,7 +2,9 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
-var sleep = require('sleep');
+//var sleep = require('sleep');
+var sleep = require('system-sleep');
+
 var cte_pixel = 53;
 
 //---------------------------------------------------servidor rest-----------
@@ -54,7 +56,7 @@ app.get('/inicio', function (req, res) {
         io.emit('addbonos', ultimosBonos());
         io.emit('newplayer', player);
         io.emit('tabla', logica.getTabla());
-        sleep.msleep(100);
+        sleep(100);
         res.send(jugador);
         console.log('OK');
     } else {
@@ -137,7 +139,7 @@ app.get('/mover', function (req, res) {
             usuario: 'jj'
         };
         io.emit('mov_rest', player);
-        sleep.msleep(530);
+        sleep(530);
         res.send([jugador, logica.getMundo()]);
         console.log('OK');
     } else {
@@ -180,7 +182,7 @@ app.get('/atacar', function (req, res) {
         io.emit('tabla', logica.getTabla());
 
     }
-    sleep.msleep(530);
+    sleep(530);
     res.send([jugador, logica.getMundo()]);
     console.log(jugador);
     console.log('OK');
@@ -343,7 +345,7 @@ function ultimosBonos() {
     var players = new Array();
 
     var bonosAux = logica.getBonos();
-    for (var j = bonosAux.length - 10; j < bonosAux.length; j++) {
+    for (var j = bonosAux.length - 3; j < bonosAux.length; j++) {
         var bono = {
             id: j,
             token: 'B' + j,
