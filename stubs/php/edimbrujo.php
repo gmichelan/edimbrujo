@@ -7,13 +7,13 @@ class Edimbrujo {
      */
 
     //public $token = 'eb1d954e6cfa2749f7624b0eda4a939f';
-    public $tokenSolicitud='cc85php';
+    public $tokenSolicitud='randophp';
     public $jugador = null;
     public $rol = null;
     public $equipo = null;
 
         
-    public $host = 'localhost:65000';//'edimbrujo.fi.uncoma.edu.ar';
+    public $host = 'edimbrujo.fi.uncoma.edu.ar';//'localhost:65000';//'edimbrujo.fi.uncoma.edu.ar';
     //public $host = 'localhost/yii/hornero';
     public function __construct($jugador,$rol,$equipo) {
         $this->jugador = $jugador;

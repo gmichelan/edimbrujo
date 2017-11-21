@@ -6,7 +6,7 @@ var Client = {};
 //Nos conectamos al servidor.
 Client.socket = io.connect();
 Client.id;
-Client.rol;
+Client.rol="";
 Client.token;
 
 Client.sendTest = function(){
@@ -51,7 +51,7 @@ Client.mover = function(direccion){
 	}
 	
 	//Enviamos al servidor in id con la tecla que acabamos de pulsar.
-	Client.socket.emit('mover', { id : id });
+        if (Client.rol!="")  Client.socket.emit('mover', { id : id });
 };
 
 Client.atacar = function(){

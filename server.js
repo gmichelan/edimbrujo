@@ -257,6 +257,7 @@ io.on('connection', function (socket) {
         //Movemos un jugador 
         socket.on('mover', function (direccion) {
             //switch(direccion.id){
+            
             console.log('Ejecutamos mover desde web del token ' + socket.player.token + ' a la dirección ' + direccion.id);
             var jugador = logica.mover(socket.player.token, direccion.id + '');
 

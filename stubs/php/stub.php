@@ -16,7 +16,7 @@
         
         
             $edimbrujo = new Edimbrujo('random', "Arquero", "php");
-            $edimbrujo->iniciar();
+            //$edimbrujo->iniciar();
         //else {
         //for ($index2 = 0; $index2 < 500 ; $index2++) {
         while(true){
