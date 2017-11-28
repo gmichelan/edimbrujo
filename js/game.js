@@ -107,19 +107,32 @@ Game.addNewPlayer = function (id, x, y, rol) {
             
             Game.playerMap[id].animations.add('derecha',[0,1,2,3,4,5,6,7],8,true);
             Game.playerMap[id].animations.add('izquierda',[8,9,10,11,12,13,14,15],8,true);
-            
+            Game.playerMap[id].animations.play('izquierda');
             break;
         case "Arquero"   :
             Game.playerMap[id] = game.add.sprite(x, y, 'arquero');
             game.physics.arcade.enable(Game.playerMap[id]);
+            
+            Game.playerMap[id].animations.add('derecha',[2,3,4,5,6,7,8],8,true);       
+            Game.playerMap[id].animations.add('izquierda',[14,15,16,17,18,19,20],8,true);
+            Game.playerMap[id].animations.play('derecha');
             break;
         case "Mago"  :
             Game.playerMap[id] = game.add.sprite(x, y, 'mago');
             game.physics.arcade.enable(Game.playerMap[id]);
+            
+            Game.playerMap[id].animations.add('correr',[0,1,2],6,true);
+            Game.playerMap[id].animations.add('atacar',[2,7,6,11,12,13,14,13,14,13,14,13],6,true);
+            Game.playerMap[id].animations.play('atacar');
+            
             break;
         case "Curador"   :
             Game.playerMap[id] = game.add.sprite(x, y, 'curador');
             game.physics.arcade.enable(Game.playerMap[id]);
+            
+            Game.playerMap[id].animations.add('derecha',[0,1,2,3,4,5,6,7,8,9,10,11],8,true);
+            Game.playerMap[id].animations.add('izquierda',[12,13,14,15,16,17,18,19,20,21,22,23],8,true);
+            Game.playerMap[id].animations.play('derecha');
             break;
         case "Bono"   :
             Game.playerMap[id] = game.add.sprite(x, y, 'bono');
@@ -130,7 +143,10 @@ Game.addNewPlayer = function (id, x, y, rol) {
             game.physics.arcade.enable(Game.playerMap[id]);
 
     }
-    var t = Game.add.text(0, 0, id);
+    var dy;
+    if(rol=="Bono") dy=10;
+    else dy=40;
+    var t = Game.add.text(0, dy, id);
     Game.playerMap[id].addChild(t);
 
 };
