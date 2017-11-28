@@ -15,11 +15,15 @@ Game.preload = function () {
     game.load.image('tile', 'assets/map/tiles.png');
     game.load.image('sprite', 'assets/sprites/sprite.png');
 
-    game.load.spritesheet('caballero', 'assets/Personajes/caballero/parado/caballero-parado-sureste.png', 72, 72);
+   /* game.load.spritesheet('caballero', 'assets/Personajes/caballero/parado/caballero-parado-sureste.png', 72, 72);
     game.load.spritesheet('arquero', 'assets/Personajes/arquero/arquero-parado.png', 24, 52);
     game.load.spritesheet('curador', 'assets/Personajes/curador/quieto-sureste.png', 73, 72);
     game.load.spritesheet('luchador', 'assets/Personajes/luchador/quieto-hacha-sureste.png', 72, 72);
-
+*/
+game.load.spritesheet('curador', 'assets/sprites/curador-corre.png',53,46);
+      game.load.spritesheet('mago', 'assets/sprites/mago.png',40,40);
+      game.load.spritesheet('arquero', 'assets/sprites/arquero-corre.png',31.3,42);
+      game.load.spritesheet('caballero', 'assets/sprites/caballero-corre.png',53.6,53);
     //IMG para los disparos.
     game.load.image('bono', 'assets/sprites/esfera.png');
 };
@@ -100,13 +104,17 @@ Game.addNewPlayer = function (id, x, y, rol) {
             console.log(Client.rol);
             Game.playerMap[id] = game.add.sprite(x, y, 'caballero');
             game.physics.arcade.enable(Game.playerMap[id]);
+            
+            Game.playerMap[id].animations.add('derecha',[0,1,2,3,4,5,6,7],8,true);
+            Game.playerMap[id].animations.add('izquierda',[8,9,10,11,12,13,14,15],8,true);
+            
             break;
         case "Arquero"   :
             Game.playerMap[id] = game.add.sprite(x, y, 'arquero');
             game.physics.arcade.enable(Game.playerMap[id]);
             break;
         case "Mago"  :
-            Game.playerMap[id] = game.add.sprite(x, y, 'luchador');
+            Game.playerMap[id] = game.add.sprite(x, y, 'mago');
             game.physics.arcade.enable(Game.playerMap[id]);
             break;
         case "Curador"   :
@@ -135,6 +143,7 @@ Game.movePlayer = function (id, x, y) {
         var tween = game.add.tween(player);
         var duration = 0;//distance*10;
         tween.to({x: x, y: y}, duration);
+        //tween.animations.playanimations.play('moverizquierda');
         tween.start();
 
         if (id === Client.id) {

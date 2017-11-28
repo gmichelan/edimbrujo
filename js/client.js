@@ -57,7 +57,7 @@ Client.mover = function(direccion){
 Client.atacar = function(){
 	//var disparo=esferas.getFirstExists(false);
 	console.log('Ejecutamos la funcion disparar');
-	Client.socket.emit('atacar');
+	if (Client.rol!="") Client.socket.emit('atacar');
 };
 
 //Enviamos un mensje al servidor cuando un  nuevo jugador se conecta al mismo.

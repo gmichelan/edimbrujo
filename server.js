@@ -56,7 +56,7 @@ app.get('/inicio', function (req, res) {
         io.emit('addbonos', ultimosBonos());
         io.emit('newplayer', player);
         io.emit('tabla', logica.getTabla());
-        sleep(100);
+        sleep(300);
         res.send(jugador);
         console.log('OK');
     } else {
@@ -139,7 +139,7 @@ app.get('/mover', function (req, res) {
             usuario: 'jj'
         };
         io.emit('mov_rest', player);
-        sleep(530);
+        sleep(300);
         res.send([jugador, logica.getMundo()]);
         console.log('OK');
     } else {
@@ -182,7 +182,7 @@ app.get('/atacar', function (req, res) {
         io.emit('tabla', logica.getTabla());
 
     }
-    sleep(530);
+    sleep(300);
     res.send([jugador, logica.getMundo()]);
     console.log(jugador);
     console.log('OK');
@@ -302,9 +302,9 @@ io.on('connection', function (socket) {
 
 
 
-        socket.on('disconnect', function () {
+       /* socket.on('disconnect', function () {
             io.emit('remove', socket.player.id);
-        });
+        });*/
     });
 });
 
