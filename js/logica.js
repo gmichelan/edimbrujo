@@ -113,8 +113,8 @@ function mover(tok, pos) {
         console.log(jugador[indiceActual]);
         var px = jugador[indiceActual][4];
         var py = jugador[indiceActual][5];
-        var limx = arreglo.length;
-        var limy = arreglo[0].length;
+        var limy = arreglo.length;
+        var limx = arreglo[0].length;
         switch (pos) {
             case '0':
                 if (px - 1 >= 0 && py - 1 >= 0) {
